@@ -20,6 +20,7 @@
         background-color: yellow;
         display: flex;
         flex-direction: column;
+        flex-wrap: wrap;
        
         align-items: center;
         justify-content: center;
@@ -74,5 +75,27 @@
     } 
     .congra{
         color:#007ea7;
-    }
+    }  
+
+    @media only screen and (max-width: 1000px) {
+        /* CSS rules for screens smaller than 600 pixels */
+        .Quiz{
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-left: 72px;
+           
+            
+        }
+        .resetquiz
+        {
+            margin-left: 72px;
+           
+        }
+      }
+
+
+    
 
