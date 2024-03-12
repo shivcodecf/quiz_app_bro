@@ -1,0 +1,78 @@
+.menu{
+    background-color: #06d6a0;
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+    
+    height: 50vh; /* Set the height to full viewport height */
+    width:50vw;
+    margin-left:20px;
+  }
+  .Menu{
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    margin-top:150px;
+     
+    } 
+    .Quiz{
+       
+        background-color: yellow;
+        display: flex;
+        flex-direction: column;
+       
+        align-items: center;
+        justify-content: center;
+        height: 50vh; /* Set the height to full viewport height */
+        width:50vw;
+        margin-top: 100px;
+       
+        margin-left:400px;
+        color:#118ab2;
+    }
+    .questions button{
+        display: flex;
+        width:100px;
+        gap:10px;
+       margin-top:10px;
+       background-color: antiquewhite;
+       cursor: pointer;
+        
+    }
+    #nextQuestion{
+        margin-top: 20px;
+        cursor: pointer;
+    }
+    #startbutton{
+        border-radius:5px 5px;
+        background-color: #8ecae6;
+        padding:5px 5px;
+        cursor: pointer;
+    }
+    .resetquiz{
+        background-color: #61dafb;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 50vh; /* Set the height to full viewport height */
+        width:50vw;
+        margin: 150px;
+        margin-left:400px;
+        cursor: pointer;
+        
+    } 
+    .resetquiz p{
+        font-size:30px;
+        color:#03045e;
+    }
+    #nextQuestion{
+        padding:2px 2px;
+        border-radius: 5px 5px ;
+        background-color: #fdf0d5;
+        cursor: pointer;
+    } 
+    .congra{
+        color:#007ea7;
+    }
+
