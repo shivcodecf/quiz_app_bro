@@ -14,23 +14,41 @@ const Quiz = () => {
   const [optionChosen, setOptionChosen] = useState("");
   const [index, setIndex] = useState(0);  
   const [lock, setLock] = useState(false);
-  const boxRef = useRef(null); // Create a ref
+  
+  // Create refs for each option button
+  const optionARef = useRef(null);
+  const optionBRef = useRef(null);
+  const optionCRef = useRef(null);
+  const optionDRef = useRef(null);
+  
+  // Store the refs in an array for easy access
+  const optionRefs = [optionARef, optionBRef, optionCRef, optionDRef];
+
   const { score, setScore, gameState, setGameState } = useContext(
       GameStateContext
   );
 
   const chooseOption = (option, e) => {
-      if (!lock) {  
-          setOptionChosen(option); 
-          if (Questions[index].asnwer === option) {
-              boxRef.current.classList.add = 'correct';
-              setScore(score + 1); 
-          } else {
-              boxRef.current.classList.add = 'incorrect';
-          }
-          setLock(true);
-      }
-  };
+    if (!lock) {  
+        setOptionChosen(option); 
+        const correctAnswer = Questions[index].asnwer; // Get the correct answer option
+        
+        // Get refs for the selected and correct answer buttons
+        const selectedOptionRef = e.target;
+        const correctAnswerIndex = ["optionA", "optionB", "optionC", "optionD"].indexOf(correctAnswer);
+        const correctAnswerRef = optionRefs[correctAnswerIndex]?.current;
+
+        if (option === correctAnswer) {
+            selectedOptionRef.classList.add('correct');
+            setScore(score + 1); 
+        } else {
+            selectedOptionRef.classList.add('incorrect');
+            correctAnswerRef?.classList.add('correct'); // Highlight correct answer
+        }
+        setLock(true);
+    }
+};
+
 
   const finishQuiz = () => {
       setGameState("stop");
@@ -40,64 +58,39 @@ const Quiz = () => {
       setIndex(index + 1);
       setOptionChosen(""); 
       setLock(false);
-      boxRef.current.style.backgroundColor = ''; // Reset background color
+      // Reset background color of all option buttons
+      optionRefs.forEach(ref => {
+          if (ref.current) {
+              ref.current.classList.remove('correct', 'incorrect');
+          }
+      });
   };
 
   return (
       <div className='Quiz'>
           <h3>{Questions[index].prompt}</h3> 
-          <div className="questions">
+          <div className="questions"> 
               <button
-                  ref={boxRef}
-                  className={`optionButton ${
-                      optionChosen === "optionA" && Questions[index].asnwer === "optionA" ? "correct" :
-                      optionChosen === "optionA" && Questions[index].asnwer !== "optionA" ? "incorrect" :
-                      ""
-                  }`}
-                  onClick={(e) => {
-                      chooseOption("optionA", e);
-                  }}
+                  ref={optionARef}
+                  onClick={(e) => chooseOption("optionA", e)}
               >
                   {Questions[index].optionA}
               </button>
-              {/* Similar buttons for optionB, optionC, and optionD */} 
-              <button
-                  ref={boxRef}
-                  className={`optionButton ${
-                      optionChosen === "optionB" && Questions[index].asnwer === "optionB" ? "correct" :
-                      optionChosen === "optionB" && Questions[index].asnwer !== "optionB" ? "incorrect" :
-                      ""
-                  }`}
-                  onClick={(e) => {
-                      chooseOption("optionB", e);
-                  }}
+              <button 
+                  ref={optionBRef}
+                  onClick={(e) => chooseOption("optionB", e)}
               >
                   {Questions[index].optionB}
               </button>
-              <button
-                  ref={boxRef}
-                  className={`optionButton ${
-                      optionChosen === "optionC" && Questions[index].asnwer === "optionC" ? "correct" :
-                      optionChosen === "optionC" && Questions[index].asnwer !== "optionC" ? "incorrect" :
-                      ""
-                  }`}
-                  onClick={(e) => {
-                      chooseOption("optionC", e);
-                  }}
+              <button 
+                  ref={optionCRef}
+                  onClick={(e) => chooseOption("optionC", e)}
               >
                   {Questions[index].optionC}
               </button> 
-
-              <button
-                  ref={boxRef}
-                  className={`optionButton ${
-                      optionChosen === "optionD" && Questions[index].asnwer === "optionD" ? "correct" :
-                      optionChosen === "optionD" && Questions[index].asnwer !== "optionD" ? "incorrect" :
-                      ""
-                  }`}
-                  onClick={(e) => {
-                      chooseOption("optionD", e);
-                  }}
+              <button  
+                  ref={optionDRef}
+                  onClick={(e) => chooseOption("optionD", e)}
               >
                   {Questions[index].optionD}
               </button>
